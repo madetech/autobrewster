@@ -1,0 +1,83 @@
+module AutoBrewster
+  class Screenshot
+    attr_accessor :server,
+                  :path,
+                  :url_paths,
+                  :screen_widths
+
+    def initialize(server, path, url_paths, screen_widths)
+      @server = server
+      @path = path
+      @url_paths = url_paths
+      @screen_widths = screen_widths
+    end
+
+    def capture(output_directory)
+      @url_paths.each do |label, path|
+        @screen_widths.each do |width|
+          output_path = get_output_path(output_directory, label, width)
+          if File.exist?(output_path)
+            puts "Screenshot already exists for #{label} at #{width}. Skipping..."
+          else
+            puts `phantomjs #{snap_js_path} "#{get_url(path)}" "#{width}" "#{output_path}"`
+          end
+        end
+      end
+    end
+
+    def compare_captured_screens
+      create_diff_dir
+
+      @url_paths.each do |label, path|
+        @screen_widths.each do |width|
+          source_path = get_output_path(:source, label, width)
+          compare_path = get_output_path(:compare, label, width)
+          diff_path = get_output_path(:diff, label, width)
+
+          #TODO: Check for presence of source/dest screens
+
+          output = `compare -fuzz 20% -metric AE -highlight-color blue #{source_path} #{compare_path} #{diff_path} 2>&1`
+
+          if output.strip! != "0"
+            puts "#{label} at #{width} wide doesn't match source screen"
+            #TODO: Failfast flag
+            exit 1
+          end
+        end
+      end
+    end
+
+    def clear_source_screens
+      clear_screenshot_directory(:source)
+    end
+
+    def clear_compare_screens
+      clear_screenshot_directory(:compare)
+    end
+
+    def clear_diff_screens
+      clear_screenshot_directory(:diff)
+    end
+
+    private
+    def get_output_path(directory, label, width)
+      "#{@path}/screens/#{directory}/#{label}-#{width}.jpg"
+    end
+
+    def get_url(path)
+      "#{@server.get_host_with_protocol_and_port}#{path}"
+    end
+
+    def create_diff_dir
+      FileUtils.mkdir_p("#{@path}/screens/diff")
+    end
+
+    def clear_screenshot_directory(directory)
+      FileUtils.rm_rf Dir.glob("#{@path}/screens/#{directory}/*.jpg")
+    end
+
+    def snap_js_path
+      File.expand_path('../../../snap.js',  __FILE__)
+    end
+  end
+end

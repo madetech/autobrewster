@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require 'auto_brewster'
+
+AutoBrewster::CLI.new(ARGV.dup).execute!
