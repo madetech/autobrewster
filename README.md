@@ -13,7 +13,7 @@ AutoBrewster is a Rubygem that provides regression testing for your CSS.
 
 ## Credits
 
-* Much of the test server launching implemenation comes from [Capybara](https://github.com/jnicklas/capybara)
+* Much of the test server launching implementation comes from [Capybara](https://github.com/jnicklas/capybara)
 * Much of the screenshot capturing implementation comes from [Wraith](https://github.com/bbc-news/wraith)
 
 ##License

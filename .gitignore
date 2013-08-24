@@ -1,4 +1,4 @@
 .DS_Store
 .bundle/
 .project
-spec/test
+spec/test/screens
