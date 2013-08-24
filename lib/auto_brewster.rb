@@ -7,6 +7,7 @@ module AutoBrewster
     attr_accessor :server, :server_start, :server_port, :rackup_path, :hostname
     attr_accessor :screen_widths, :url_paths
     attr_accessor :path
+    attr_accessor :failfast
 
     def configure
       yield self
@@ -78,6 +79,7 @@ AutoBrewster.configure do |config|
   config.rackup_path = 'config.ru'
   config.server {|app, port| AutoBrewster.run_default_server(app, port)}
   config.hostname = false
+  config.failfast = false
   config.screen_widths = [320, 1024]
   config.url_paths = {
     :home => '/'

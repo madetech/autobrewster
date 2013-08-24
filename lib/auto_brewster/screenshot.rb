@@ -3,7 +3,8 @@ module AutoBrewster
     attr_accessor :server,
                   :path,
                   :url_paths,
-                  :screen_widths
+                  :screen_widths,
+                  :failed_fast
 
     def initialize(server, path, url_paths, screen_widths)
       @server = server
@@ -25,8 +26,9 @@ module AutoBrewster
       end
     end
 
-    def compare_captured_screens
+    def compare_captured_screens(failfast = false)
       create_diff_dir
+      failures = 0
 
       @url_paths.each do |label, path|
         @screen_widths.each do |width|
@@ -38,13 +40,16 @@ module AutoBrewster
 
           output = `compare -fuzz 20% -metric AE -highlight-color blue #{source_path} #{compare_path} #{diff_path} 2>&1`
 
-          if output.strip! != "0"
-            puts "#{label} at #{width} wide doesn't match source screen"
-            #TODO: Failfast flag
+          failures += get_failure_count(output, label, width)
+
+          if failfast
+            @failed_fast = true
             exit 1
           end
         end
       end
+
+      exit 1 if failures > 0
     end
 
     def check_source_compare_screens_exist(label, width)
@@ -84,6 +89,15 @@ module AutoBrewster
 
     def snap_js_path
       File.expand_path('../../../snap.js',  __FILE__)
+    end
+
+    def get_failure_count(output, label, width)
+      if output.strip! != "0"
+        puts "#{label} at #{width} wide doesn't match source screen"
+        return 1
+      end
+
+      return 0
     end
   end
 end

@@ -57,6 +57,19 @@ describe AutoBrewster::Screenshot do
         @screenshot.compare_captured_screens
       }.not_to raise_error
     end
+
+    it 'should exit with a status of 1 as soon as a differing screenshot is found if failfast is enabled' do
+      AutoBrewster::Helpers::Screenshot.populate_dir(
+        :compare,
+        source_file = 'red_with_blue.jpg',
+        dest_file = 'home-320.jpg'
+      )
+
+      expect{
+        @screenshot.compare_captured_screens(failfast: true)
+      }.to raise_error(SystemExit)
+      expect(@screenshot.failed_fast).to be_true
+    end
   end
 
   describe '#check_source_compare_screens_exist' do

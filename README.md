@@ -52,6 +52,7 @@ AutoBrewster provides the following default configuration:
     config.rackup_path = 'config.ru'
     config.server {|app, port| AutoBrewster.run_default_server(app, port)}
     config.hostname = false
+    config.failfast = false
     config.screen_widths = [320, 1024]
     config.url_paths = {
       :home => '/'
@@ -67,6 +68,7 @@ To override part of the configuration, you should redefine the configuration blo
 * `rackup_path` relative path to rackup file.
 * `server` by default AutoBrewster will launch a thin server. If you want to use something else, pass a block to this function implementing a different rack server (such as Webrick).
 * `hostname` if AutoBrewster doesn't launch a rack server, you'll need to pass the hostname that AutoBrewster should connect to.
+* `failfast` will exit the task with a status of 1 as soon as it encounters a screenshot that doesn't match, rather than continue to run the tests and show all of the screenshots that don't match. Useful for CI environments; where you typically wouldn't expect any failures.
 * `screen_widths` an array of widths that AutoBrewster should capture and compare screenshots for. Useful for testing responsive designs.
 * `url_paths` a hash containing friendly labels and URL paths that AutoBrewster should capture and compare screenshots for.
 
