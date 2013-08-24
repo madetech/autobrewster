@@ -60,7 +60,7 @@ module AutoBrewster
     def include_support
       include_support_env
       Dir.glob("#{path}/support/*.rb").map do |file|
-        require file unless file.end_with?('env.rb')
+        require file unless file.end_with?('/env.rb')
       end
     end
 

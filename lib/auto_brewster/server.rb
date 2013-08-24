@@ -1,4 +1,5 @@
 require 'rack'
+require 'net/http'
 require File.expand_path('../middleware',  __FILE__)
 
 module AutoBrewster

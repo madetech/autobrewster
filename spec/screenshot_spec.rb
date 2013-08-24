@@ -59,6 +59,28 @@ describe AutoBrewster::Screenshot do
     end
   end
 
+  describe '#check_source_compare_screens_exist' do
+    it 'should raise an error if the source or compare screens don\'t exist' do
+      expect{
+        @screenshot.check_source_compare_screens_exist('home', 320)
+      }.to raise_error
+    end
+
+    it 'should not raise an error if the source and compare screens exist' do
+      [:source, :compare].each do |dir|
+        AutoBrewster::Helpers::Screenshot.populate_dir(
+          dir,
+          source_file = 'red.jpg',
+          dest_file = 'home-320.jpg'
+        )
+      end
+
+      expect{
+        @screenshot.check_source_compare_screens_exist('home', 320)
+      }.to_not raise_error
+    end
+  end
+
   describe '#clear_source_screens' do
     it 'should empty the source screenshot directory' do
       AutoBrewster::Helpers::Screenshot.populate_dir(:source)

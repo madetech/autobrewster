@@ -30,11 +30,11 @@ module AutoBrewster
 
       @url_paths.each do |label, path|
         @screen_widths.each do |width|
+          check_source_compare_screens_exist(label, width)
+
           source_path = get_output_path(:source, label, width)
           compare_path = get_output_path(:compare, label, width)
           diff_path = get_output_path(:diff, label, width)
-
-          #TODO: Check for presence of source/dest screens
 
           output = `compare -fuzz 20% -metric AE -highlight-color blue #{source_path} #{compare_path} #{diff_path} 2>&1`
 
@@ -44,6 +44,12 @@ module AutoBrewster
             exit 1
           end
         end
+      end
+    end
+
+    def check_source_compare_screens_exist(label, width)
+      [get_output_path(:source, label, width), get_output_path(:compare, label, width)].each do |path|
+        raise "Screenshot at #{path} does not exist" unless File.exist?(path)
       end
     end
 
