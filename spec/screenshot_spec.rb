@@ -9,11 +9,14 @@ describe AutoBrewster::Screenshot do
       {:home => '/'},
       [320]
     )
+
+    @screenshot.clear_source_screens
+    @screenshot.clear_compare_screens
+    @screenshot.clear_diff_screens
   end
 
   describe '#capture' do
     it 'should capture screenshots of the specified paths at the specified widths' do
-      @screenshot.clear_source_screens
       @server.start
       @screenshot.capture(:source)
       @server.stop
@@ -24,8 +27,6 @@ describe AutoBrewster::Screenshot do
 
   describe '#compare_captured_screens' do
     before(:each) do
-      @screenshot.clear_source_screens
-      @screenshot.clear_compare_screens
       AutoBrewster::Helpers::Screenshot.populate_dir(
         :source,
         source_file = 'red.jpg',
@@ -60,7 +61,6 @@ describe AutoBrewster::Screenshot do
 
   describe '#clear_source_screens' do
     it 'should empty the source screenshot directory' do
-      @screenshot.clear_source_screens
       AutoBrewster::Helpers::Screenshot.populate_dir(:source)
       @screenshot.clear_source_screens
       expect(AutoBrewster::Helpers::Screenshot.get_dir_contents(:source).length).to be 0
@@ -69,7 +69,6 @@ describe AutoBrewster::Screenshot do
 
   describe '#clear_compare_screens' do
     it 'should empty the compare screenshot directory' do
-      @screenshot.clear_compare_screens
       AutoBrewster::Helpers::Screenshot.populate_dir(:compare)
       @screenshot.clear_compare_screens
       expect(AutoBrewster::Helpers::Screenshot.get_dir_contents(:compare).length).to be 0
@@ -78,7 +77,6 @@ describe AutoBrewster::Screenshot do
 
   describe '#clear_diff_screens' do
     it 'should empty the diff screenshot directory' do
-      @screenshot.clear_diff_screens
       AutoBrewster::Helpers::Screenshot.populate_dir(:diff)
       @screenshot.clear_diff_screens
       expect(AutoBrewster::Helpers::Screenshot.get_dir_contents(:diff).length).to be 0
