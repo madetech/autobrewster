@@ -7,6 +7,7 @@ Gem::Specification.new do |s|
   s.authors      = ['Chris Blackburn']
   s.email        = 'chris@madebymade.co.uk'
   s.files        = ['lib/auto_brewster.rb', 'bin/autobrewster']
+  s.license      = 'BSD'
   s.homepage     = 'https://github.com/madebymade/autobrewster'
 
   s.require_path = 'lib'
