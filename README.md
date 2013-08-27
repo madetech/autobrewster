@@ -36,9 +36,23 @@ AutoBrewster will need to be able to connect to a test server running on a port 
 
 AutoBrewster is configured out of the box to launch a rack server in test mode. (by default it assumes you have a `config.ru` in the same directory as AutoBrewster is being run). You can disable this and choose to launch your own test server, in which case you'll need to give AutoBrewster a hostname it can connect to.
 
-## Loading factory/fixture data
+## Structure
 
-You'll likely want to get your application to a known state before you launch a test run. By default, AutoBrewster will execute all of the files in test/brewster/support. It is suggested you use these support files to invoke your test factories, load fixture data, mock out external service calls etc.
+AutoBrewster expects a particular file structure from the root of your application. At present your should create this file structure yourself.
+
+```
+.
+└── test
+   └── autobrewster
+      └── support
+         ├── pre_launch
+         ├── post_launch
+         └── env.rb
+```
+
+* `pre_launch` all files with a `.rb` extension in this directory will be executed prior to the test run. This is useful for mocking out web service interfaces and other things that don't require your application framework.
+* `post_launch` all files with a `.rb` extension in this directory will be executed prior to the server server being launched. This is useful for things like factories that require your application framework.
+* `env.rb` will be loaded as soon as AutoBrewster starts. This is the place to override default configuration values, require external libraries and the like.
 
 ## Configuration
 
@@ -51,7 +65,9 @@ AutoBrewster provides the following default configuration:
     config.path = "#{Dir.pwd}/test/brewster"
     config.rackup_path = 'config.ru'
     config.server {|app, port| AutoBrewster.run_default_server(app, port)}
+    config.server_timeout = 10
     config.hostname = false
+    config.debug = true
     config.failfast = false
     config.screen_widths = [320, 1024]
     config.url_paths = {
@@ -67,7 +83,9 @@ To override part of the configuration, you should redefine the configuration blo
 * `path` path where support files should be found and where output screenshots will be stored.
 * `rackup_path` relative path to rackup file.
 * `server` by default AutoBrewster will launch a thin server. If you want to use something else, pass a block to this function implementing a different rack server (such as Webrick).
+* `server_timeout` how long to wait in seconds for the test server to start
 * `hostname` if AutoBrewster doesn't launch a rack server, you'll need to pass the hostname that AutoBrewster should connect to.
+* `debug` will trigger the default server runner to make a bit more noise
 * `failfast` will exit the task with a status of 1 as soon as it encounters a screenshot that doesn't match, rather than continuing with the test run to show all of the screenshots that don't match. Useful for CI environments; where you typically wouldn't expect any failures.
 * `screen_widths` an array of widths that AutoBrewster should capture and compare screenshots for. Useful for testing responsive designs.
 * `url_paths` a hash containing friendly labels and URL paths that AutoBrewster should capture and compare screenshots for.

@@ -14,7 +14,7 @@ describe AutoBrewster do
       expect(AutoBrewster::Test::Env.test_value).to eq 'set_in_env'
     end
 
-    it 'should load subsequent test files after the env file' do
+    it 'should load subsequent pre launch test files after the env file' do
       AutoBrewster.setup
       expect(AutoBrewster::Test::Env.override_value).to eq 'set_in_secondary'
     end
@@ -31,6 +31,14 @@ describe AutoBrewster do
 
     it 'should be configured to not set a hostname by default' do
       expect(AutoBrewster.hostname).to be_false
+    end
+
+    it 'should be set to timeout the test server after 10 seconds by default' do
+      expect(AutoBrewster.server_timeout).to be 10
+    end
+
+    it 'should have debug enabled by default' do
+      expect(AutoBrewster.debug).to be_true
     end
 
     it 'should be set to capture at 320 and 1024 widths by default' do

@@ -6,6 +6,7 @@ module AutoBrewster
           AutoBrewster::Server.new(
             server_runner,
             5001,
+            10,
             AutoBrewster::Helpers.spec_path('app/config.ru')
           )
         end

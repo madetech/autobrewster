@@ -11,6 +11,31 @@ describe AutoBrewster::Server do
       expect(res.is_a?(Net::HTTPSuccess)).to be_true
       server.stop
     end
+
+    it 'should load the post launch test files' do
+      AutoBrewster.configure do |config|
+        config.path = AutoBrewster::Helpers.spec_path('test')
+      end
+
+      AutoBrewster.include_support_post_launch
+      expect(AutoBrewster::Test::Env.override_value).to eq 'set_in_post_launch'
+    end
+
+    it 'should timeout after the specified time' do
+      server = AutoBrewster::Server.new(
+        AutoBrewster::Helpers::Server.server_runner,
+        5001,
+        0.5,
+        AutoBrewster::Helpers.spec_path('app/config.ru')
+      )
+      server.stub(:responsive?).and_return(false)
+
+      expect{
+        server.start
+      }.to raise_error(Timeout::Error)
+
+      server.stop
+    end
   end
 
   describe '#stop' do
@@ -30,6 +55,7 @@ describe AutoBrewster::Server do
       server = AutoBrewster::Server.new(
         AutoBrewster::Helpers::Server.server_runner,
         5001,
+        10,
         AutoBrewster::Helpers.spec_path('app/config.ru'),
         'http://www.example.org/'
       )
