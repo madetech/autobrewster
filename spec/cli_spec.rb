@@ -9,7 +9,7 @@ describe AutoBrewster::CLI do
 
     it 'should raise an error if an invalid method is called' do
       lambda {
-        cli = AutoBrewster::CLI.new(:does_not_exist).get_action
+        cli = AutoBrewster::CLI.new([:does_not_exist]).get_action
       }.should raise_error
     end
 

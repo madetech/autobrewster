@@ -18,7 +18,7 @@ module AutoBrewster
       end
 
       def fixture_dir_path
-        spec_path("fixtures")
+        spec_path(:fixtures)
       end
     end
   end

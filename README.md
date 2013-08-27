@@ -38,7 +38,7 @@ AutoBrewster is configured out of the box to launch a rack server in test mode. 
 
 ## Loading factory/fixture data
 
-You'll likely want to get your application in to a known state before you launch a test run. By default, AutoBrewster will execute all of the files in test/brewster/support. It is suggested you use these support files to invoke your test factories, load fixture data, mock out external service calls etc.
+You'll likely want to get your application to a known state before you launch a test run. By default, AutoBrewster will execute all of the files in test/brewster/support. It is suggested you use these support files to invoke your test factories, load fixture data, mock out external service calls etc.
 
 ## Configuration
 
@@ -64,11 +64,11 @@ To override part of the configuration, you should redefine the configuration blo
 
 * `server_start` set to false to prevent AutoBrewster launching a rack server in test mode.
 * `server_port` specifies the port AutoBrewster will launch the rack test server on.
-* `path` path where support files should be find and where output screenshots will be stored.
+* `path` path where support files should be found and where output screenshots will be stored.
 * `rackup_path` relative path to rackup file.
 * `server` by default AutoBrewster will launch a thin server. If you want to use something else, pass a block to this function implementing a different rack server (such as Webrick).
 * `hostname` if AutoBrewster doesn't launch a rack server, you'll need to pass the hostname that AutoBrewster should connect to.
-* `failfast` will exit the task with a status of 1 as soon as it encounters a screenshot that doesn't match, rather than continue to run the tests and show all of the screenshots that don't match. Useful for CI environments; where you typically wouldn't expect any failures.
+* `failfast` will exit the task with a status of 1 as soon as it encounters a screenshot that doesn't match, rather than continuing with the test run to show all of the screenshots that don't match. Useful for CI environments; where you typically wouldn't expect any failures.
 * `screen_widths` an array of widths that AutoBrewster should capture and compare screenshots for. Useful for testing responsive designs.
 * `url_paths` a hash containing friendly labels and URL paths that AutoBrewster should capture and compare screenshots for.
 

@@ -1,12 +1,12 @@
 Gem::Specification.new do |s|
   s.name         = 'autobrewster'
-  s.version      = '0.0.1'
-  s.date         = '2013-08-24'
+  s.version      = '0.0.2'
+  s.date         = '2013-08-27'
   s.summary      = 'CSS regression testing suite'
   s.description  = 'Combines PhantomJS and Imagemagick to provide screenshot-based comparison for CSS regression testing'
   s.authors      = ['Chris Blackburn']
   s.email        = 'chris@madebymade.co.uk'
-  s.files        = ['lib/auto_brewster.rb', 'bin/autobrewster']
+  s.files        = Dir['lib/**/*.rb'] + Dir['bin/*'] + %w[snap.js BSD-LICENSE.txt]
   s.license      = 'BSD'
   s.homepage     = 'https://github.com/madebymade/autobrewster'
 
@@ -20,5 +20,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'sinatra', '~> 1.4'
 
   ignores  = File.readlines('.gitignore').grep(/\S+/).map(&:chomp)
-  dotfiles = %w[.gitignore .travis.yml .editorconfig]
+  dotfiles = %w[.gitignore .travis.yml .editorconfig .rbenv-version]
 end
