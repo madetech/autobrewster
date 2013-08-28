@@ -34,6 +34,7 @@ describe AutoBrewster::Server do
         server.start
       }.to raise_error(Timeout::Error)
 
+      RSpec.reset
       server.stop
     end
   end
