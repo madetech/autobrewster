@@ -59,12 +59,12 @@ module AutoBrewster
     end
 
     def include_support_post_launch
-      Dir.glob("#{path}/support/post_launch/*.rb").map { |file| require file }
+      Dir.glob("#{path}/support/post_launch/*.rb").sort.map { |file| require file }
     end
 
     private
     def include_support_pre_launch
-      Dir.glob("#{path}/support/pre_launch/*.rb").map { |file| require file }
+      Dir.glob("#{path}/support/pre_launch/*.rb").sort.map { |file| require file }
     end
 
     def include_support_env

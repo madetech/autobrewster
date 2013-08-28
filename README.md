@@ -59,20 +59,20 @@ AutoBrewster expects a particular file structure from the root of your applicati
 AutoBrewster provides the following default configuration:
 
 ```ruby
-  AutoBrewster.configure do |config|
-    config.server_start = true
-    config.server_port = 5001
-    config.path = "#{Dir.pwd}/test/brewster"
-    config.rackup_path = 'config.ru'
-    config.server {|app, port| AutoBrewster.run_default_server(app, port)}
-    config.server_timeout = 10
-    config.hostname = false
-    config.debug = true
-    config.failfast = false
-    config.screen_widths = [320, 1024]
-    config.url_paths = {
-      :home => '/'
-    }
+AutoBrewster.configure do |config|
+  config.server_start = true
+  config.server_port = 5001
+  config.path = "#{Dir.pwd}/test/brewster"
+  config.rackup_path = 'config.ru'
+  config.server {|app, port| AutoBrewster.run_default_server(app, port)}
+  config.server_timeout = 10
+  config.hostname = false
+  config.debug = true
+  config.failfast = false
+  config.screen_widths = [320, 1024]
+  config.url_paths = {
+    :home => '/'
+  }
 end
 ```
 
