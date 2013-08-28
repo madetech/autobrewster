@@ -45,14 +45,6 @@ module AutoBrewster
       end
     end
 
-    def include_support
-      p "including support"
-
-      Dir.glob("#{AutoBrewster.path}/support/*.rb").map do |file|
-        require file unless file.end_with?('/env.rb')
-      end
-    end
-
     private
     def responsive?
       return false if @server_thread and @server_thread.join(0)

@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name         = 'autobrewster'
-  s.version      = '0.0.2'
-  s.date         = '2013-08-27'
+  s.version      = '0.0.3'
+  s.date         = '2013-08-28'
   s.summary      = 'CSS regression testing suite'
   s.description  = 'Combines PhantomJS and Imagemagick to provide screenshot-based comparison for CSS regression testing'
   s.authors      = ['Chris Blackburn']

@@ -59,7 +59,6 @@ module AutoBrewster
     end
 
     def include_support_post_launch
-
       Dir.glob("#{path}/support/post_launch/*.rb").map { |file| require file }
     end
 

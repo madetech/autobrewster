@@ -51,7 +51,7 @@ AutoBrewster expects a particular file structure from the root of your applicati
 ```
 
 * `pre_launch` all files with a `.rb` extension in this directory will be executed prior to the test run. This is useful for mocking out web service interfaces and other things that don't require your application framework.
-* `post_launch` all files with a `.rb` extension in this directory will be executed prior to the server server being launched. This is useful for things like factories that require your application framework.
+* `post_launch` all files with a `.rb` extension in this directory will be executed prior to the test server being launched. This is useful for things like factories that do require your application framework.
 * `env.rb` will be loaded as soon as AutoBrewster starts. This is the place to override default configuration values, require external libraries and the like.
 
 ## Configuration
@@ -76,16 +76,16 @@ AutoBrewster provides the following default configuration:
 end
 ```
 
-To override part of the configuration, you should redefine the configuration block in `test/brewster/support/env.rb`.
+To override part of the configuration, you should redefine the configuration block in `test/autobrewster/support/env.rb`.
 
 * `server_start` set to false to prevent AutoBrewster launching a rack server in test mode.
 * `server_port` specifies the port AutoBrewster will launch the rack test server on.
 * `path` path where support files should be found and where output screenshots will be stored.
 * `rackup_path` relative path to rackup file.
 * `server` by default AutoBrewster will launch a thin server. If you want to use something else, pass a block to this function implementing a different rack server (such as Webrick).
-* `server_timeout` how long to wait in seconds for the test server to start
+* `server_timeout` how long to wait in seconds for the test server to start.
 * `hostname` if AutoBrewster doesn't launch a rack server, you'll need to pass the hostname that AutoBrewster should connect to.
-* `debug` will trigger the default server runner to make a bit more noise
+* `debug` will trigger the default server runner to make a bit more noise.
 * `failfast` will exit the task with a status of 1 as soon as it encounters a screenshot that doesn't match, rather than continuing with the test run to show all of the screenshots that don't match. Useful for CI environments; where you typically wouldn't expect any failures.
 * `screen_widths` an array of widths that AutoBrewster should capture and compare screenshots for. Useful for testing responsive designs.
 * `url_paths` a hash containing friendly labels and URL paths that AutoBrewster should capture and compare screenshots for.
