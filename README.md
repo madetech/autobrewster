@@ -98,6 +98,10 @@ As an aside, we'd heartily recommend moving your development estate to something
 
 ## Credits
 
+Developed and maintained by [Made](http://www.madebymade.co.uk).
+
+[![made](https://s3-eu-west-1.amazonaws.com/made-assets/googleapps/google-apps.png)](http://www.madebymade.co.uk/)
+
 * Much of the rack server launching implementation comes from [Capybara](https://github.com/jnicklas/capybara)
 * Much of the screenshot capturing implementation comes from [Wraith](https://github.com/bbc-news/wraith)
 
