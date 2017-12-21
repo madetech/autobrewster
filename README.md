@@ -1,6 +1,6 @@
 # AutoBrewster
 
-[![Build Status](https://travis-ci.org/madebymade/autobrewster.png?branch=master)](https://travis-ci.org/madebymade/autobrewster)
+[![Build Status](https://travis-ci.org/madetech/autobrewster.png?branch=master)](https://travis-ci.org/madetech/autobrewster)
 [![Gem Version](https://badge.fury.io/rb/autobrewster.png)](http://badge.fury.io/rb/autobrewster)
 
 AutoBrewster is a Rubygem that provides regression testing for your CSS. It's got out of the box support for launching and testing Rack applications; though you can configure it to test against any host.
