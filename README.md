@@ -104,6 +104,6 @@ Developed and maintained by [Made](http://www.madetech.co.uk?ref=github&repo=aut
 * Much of the rack server launching implementation comes from [Capybara](https://github.com/jnicklas/capybara)
 * Much of the screenshot capturing implementation comes from [Wraith](https://github.com/bbc-news/wraith)
 
-##License
+## License
 
 Licensed under [New BSD License](http://opensource.org/licenses/BSD-3-Clause)
